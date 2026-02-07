@@ -358,7 +358,6 @@
         var url = repo.html_url;
 
         var wrapper = document.createElement('div');
-        wrapper.setAttribute('data-aos', 'zoom-in');
         wrapper.className = 'flex-1';
 
         var card = document.createElement('div');
