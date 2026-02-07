@@ -672,12 +672,19 @@ ol {
     margin-bottom: 2px;
     margin-top: 5px;
 }
+.projects-area .project-item .project-info {
+    overflow: hidden;
+    min-width: 0;
+}
 .projects-area .project-item .project-info h1 {
     font-size: 22px;
     color: #ffffff;
     opacity: 0.9;
     font-weight: 500;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .projects-area .project-item .project-btn {
     opacity: 0.2;
