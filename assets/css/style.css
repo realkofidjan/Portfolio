@@ -1924,6 +1924,12 @@ ol {
     .projects-area .project-item .project-img img {
         width: 100%;
     }
+    .projects-area #projects-list .d-flex {
+        flex-direction: column;
+    }
+    .projects-area #projects-list .flex-1 {
+        width: 100%;
+    }
     .blog-area .blog-items .blog-item .img-box {
         height: 300px;
     }
