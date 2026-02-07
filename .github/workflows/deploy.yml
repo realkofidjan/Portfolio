@@ -1,0 +1,58 @@
+# Deploy static site to GitHub Pages (project site)
+# Site will be available at: https://<username>.github.io/<repository-name>/
+#
+# GitHub Pages Project Sites:
+# - You can have unlimited project sites (one per repository)
+# - Each deploys to: username.github.io/repository-name
+# - The repository name becomes the URL path
+# - All asset paths must be relative (not starting with /)
+#
+# To host a NEW project on GitHub Pages:
+# 1. Create a new repository (e.g., "my-new-project")
+# 2. Push your code to it
+# 3. Copy this workflow file to .github/workflows/deploy.yml
+# 4. Go to repo Settings > Pages > Source: "GitHub Actions"
+# 5. Your site will be at: username.github.io/my-new-project
+#
+# Example with multiple projects:
+#   realkofidjan.github.io/Portfolio     ← this portfolio
+#   realkofidjan.github.io/ATTA          ← another project
+#   realkofidjan.github.io/mo-travel     ← another project
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

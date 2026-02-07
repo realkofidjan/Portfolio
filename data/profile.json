@@ -1,0 +1,66 @@
+{
+  "name": "Nana Kofi Djan",
+  "headline": "CREATIVE TECHNOLOGIST | UI/UX DESIGNER | GRAPHIC DESIGNER",
+  "location": "Accra, Greater Accra Region, Ghana",
+  "email": "nkndjan@gmail.com",
+  "phone": "+233 205 555 084",
+  "about": "I'm a Creative Technologist and UI/UX Designer with a strong foundation in computer science, branding, and digital product experience. I work at the intersection of design, technology, and communication, helping organizations build visually consistent, user-centered, and scalable digital solutions.",
+  "experienceStartYear": 2022,
+  "experience": [
+    {
+      "title": "Senior Communications Officer",
+      "company": "Level10 Communications Technologies",
+      "date": "Sep 2025 - Present",
+      "description": "Leading branding initiatives and design systems while contributing to UI/UX design, interface prototyping, and usability improvements across web and software products. Reviewing and testing software solutions to ensure product quality, usability, accessibility, and alignment with business goals."
+    },
+    {
+      "title": "Graduate Intern",
+      "company": "IT Consortium",
+      "date": "Oct 2024 - Sep 2025",
+      "description": "Backend development and technical support for OSIS. Writing SQL queries to solve client issues and writing AWS Lambda functions for software migration."
+    },
+    {
+      "title": "Software Engineer Analyst",
+      "company": "Yazi",
+      "date": "Jun 2023 - Jul 2023",
+      "description": "Testing mobile applications for Yazi clients and implementing required changes. Created a responsive Flutter application for the Yazi-Guide Dashboard that read data directly from Firebase storage."
+    },
+    {
+      "title": "Web Developer Intern",
+      "company": "IT Consortium",
+      "date": "Jul 2022 - Aug 2022",
+      "description": "Interned at the IT Department, learning database management and creating effective databases. Deployed live servers to host web applications incorporating CRUD database operations."
+    },
+    {
+      "title": "Volunteer",
+      "company": "Future of Africa",
+      "date": "Mar 2023 - May 2023",
+      "description": "Teaching, connecting, and communicating with children living in street situations in Accra."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Ashesi University",
+      "degree": "Undergraduate, Computer Science",
+      "date": "2020 - 2025",
+      "description": "Studying Computer Science at one of Africa's most prestigious liberal arts universities. Developed strong foundations in software engineering, algorithms, data structures, and human-computer interaction. Co-developed ATTA, an AI-powered Intelligent Tutoring System, as an Applied Capstone Project. Served as Real Estate Club President."
+    },
+    {
+      "institution": "Delhi Private School",
+      "degree": "Senior Secondary - General Science",
+      "date": "2016 - 2019",
+      "description": "Served as basketball captain and IT volunteer teacher at Summer Camp. Developed skills in video, photo, and audio editing. Created and managed the church livestream platform, sparking a passion for digital media and technology."
+    }
+  ],
+  "skills": [
+    "UI/UX Design",
+    "Graphic Design",
+    "Software Development",
+    "Visual Communication",
+    "Product Review",
+    "Backend Development"
+  ],
+  "certifications": [
+    "Foundations of Project Management - Google"
+  ]
+}

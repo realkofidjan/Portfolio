@@ -1,0 +1,68 @@
+[
+  {
+    "id": "brand-strategy-level10",
+    "title": "Translating Complex Ideas into Clear Visuals: My Approach to Brand Strategy",
+    "date": "February 2026",
+    "category": "Branding & Design",
+    "image": "assets/images/blog1.jpg",
+    "excerpt": "At Level10 Communications Technologies, I lead branding initiatives and design systems that ensure visual consistency across all platforms. I've learned that great brand design isn't just about aesthetics; it's about building trust, improving engagement, and aligning every visual touchpoint with business goals.",
+    "content": [
+      "One of the most rewarding parts of my role as Senior Communications Officer at Level10 Communications Technologies is the challenge of translating complex business ideas into clear, compelling visuals. Brand design isn't just about making things look good; it's a strategic discipline that directly impacts how people perceive and engage with a product or organization.",
+      "When I approach a new branding project, I start by understanding the business goals, target audience, and competitive landscape. Every design decision, from typography to color palette to layout, should serve a purpose. A design system isn't just a style guide; it's a living framework that ensures consistency across every touchpoint, from the website to marketing materials to the product UI itself.",
+      "Working at the intersection of design, technology, and communication has taught me that the best solutions come from cross-functional collaboration. I work closely with developers, product teams, and stakeholders to ensure that what we design is not only visually compelling but technically feasible and aligned with real user needs."
+    ],
+    "bullets": [
+      "Always start with business goals before opening any design tool",
+      "Build design systems, not just individual assets",
+      "Test your designs with real users, not just stakeholders",
+      "Collaborate early and often with developers and product teams",
+      "Consistency builds trust; every touchpoint matters"
+    ],
+    "closing": "Whether it's leading a full brand refresh or prototyping a new user interface, my approach is always the same: clarity, functionality, and impact. Great design should feel effortless to the user, even when the thinking behind it is anything but.",
+    "tags": ["Branding", "UI/UX"]
+  },
+  {
+    "id": "sql-aws-it-consortium",
+    "title": "From SQL Queries to AWS Lambda: My Journey as a Graduate Intern at IT Consortium",
+    "date": "October 2024",
+    "category": "Backend Development",
+    "image": "assets/images/blog2.jpg",
+    "excerpt": "Joining IT Consortium as a graduate intern gave me hands-on experience with backend development and software migration at scale. Writing SQL queries to solve real client issues and building AWS Lambda functions taught me that great software is about solving problems efficiently, not just writing code.",
+    "content": [
+      "Joining IT Consortium as a graduate intern was a pivotal moment in my career. It was here that I transitioned from academic projects to real-world software engineering, working on backend systems that served actual clients with real business needs.",
+      "My primary responsibilities involved writing SQL queries to diagnose and resolve client issues in the OSIS platform, and developing AWS Lambda functions to support software migration efforts. These weren't theoretical exercises — every query I wrote and every function I deployed had a direct impact on the client experience.",
+      "One of the most important lessons I learned was the value of writing clean, efficient code. In a production environment, performance matters. A poorly optimized query doesn't just slow down a page — it affects hundreds of users and can cascade into larger system issues."
+    ],
+    "bullets": [
+      "Production code demands a different mindset than academic projects",
+      "SQL optimization is as much art as science",
+      "AWS Lambda enables powerful serverless architectures",
+      "Clear documentation saves future developers hours of work",
+      "Client-facing issues require both technical skill and empathy"
+    ],
+    "closing": "My time at IT Consortium solidified my passion for building robust backend systems. It taught me that great software engineering is about understanding the problem deeply before writing a single line of code.",
+    "tags": ["Backend", "SQL", "AWS"]
+  },
+  {
+    "id": "flutter-firebase-yazi",
+    "title": "Building a Flutter Dashboard with Firebase: Lessons from My Time at Yazi",
+    "date": "June 2023",
+    "category": "Flutter & Mobile",
+    "image": "",
+    "excerpt": "During my time at Yazi, I built a responsive Flutter application for the Yazi-Guide Dashboard that pulled data directly from Firebase storage. This experience taught me the power of cross-platform development and the importance of testing mobile applications with real users in mind.",
+    "content": [
+      "My internship at Yazi was my first deep dive into mobile development with Flutter. The main project was building the Yazi-Guide Dashboard — a responsive application that pulled data directly from Firebase storage and presented it in a clean, usable interface.",
+      "Flutter's widget-based architecture was a revelation. The ability to build once and deploy across platforms, while maintaining native-level performance, fundamentally changed how I think about application development. Combined with Firebase's real-time database capabilities, we could deliver a responsive experience that updated instantly as data changed.",
+      "Testing was a crucial part of the process. At Yazi, I learned that mobile testing isn't just about checking if buttons work — it's about understanding how real users interact with the app on different devices, screen sizes, and network conditions."
+    ],
+    "bullets": [
+      "Flutter's hot reload dramatically speeds up development",
+      "Firebase integration enables real-time data synchronization",
+      "Cross-platform development doesn't mean compromising on quality",
+      "User testing on real devices reveals issues simulators miss",
+      "Clean state management is essential for maintainable Flutter apps"
+    ],
+    "closing": "Building the Yazi-Guide Dashboard was a formative experience that sparked my interest in cross-platform development. The combination of Flutter's flexibility and Firebase's power showed me what's possible when you choose the right tools for the job.",
+    "tags": ["Flutter", "Firebase", "Mobile"]
+  }
+]

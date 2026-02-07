@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="right">
                                     <span>MAIL Me</span>
-                                    <h4>nana.djan@ashesi.edu.gh</h4>
+                                    <h4 id="contact-email">nana.djan@ashesi.edu.gh</h4>
                                 </div>
                             </li>
 
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="right">
                                     <span>Contact Me</span>
-                                    <h4>+233 205 555 084</h4>
+                                    <h4 id="contact-phone">+233 205 555 084</h4>
                                 </div>
                             </li>
 
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="right">
                                     <span>Location</span>
-                                    <h4>Accra, Greater Accra Region <br>Ghana</h4>
+                                    <h4 id="contact-location">Accra, Greater Accra Region <br>Ghana</h4>
                                 </div>
                             </li>
                         </ul>
@@ -105,21 +105,24 @@
                             <img src="assets/images/bg1.png" alt="BG" class="bg-img">
                             <img src="assets/images/icon3.png" alt="Icon">
                             <h1>Let’s work <span>together.</span></h1>
-                            <form method="POST" action="https://formspree.io/f/placeholder">
+                            <form method="POST" action="https://api.web3forms.com/submit">
+                                <input type="hidden" name="access_key" value="d425de7e-e455-4130-8213-44d4942fd162">
+                                <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                                <input type="hidden" name="subject" value="New Contact from Portfolio">
                                 <div class="alert alert-success messenger-box-contact__msg" style="display: none" role="alert">
                                     Your message was sent successfully.
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" name="full-name" id="full-name" placeholder="Name *">
+                                    <input type="text" name="full-name" id="full-name" placeholder="Name *" required>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" name="email" id="email" placeholder="Email *">
+                                    <input type="email" name="email" id="email" placeholder="Email *" required>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" name="subject" id="subject" placeholder="Your Subject *">
+                                    <input type="text" name="subject" id="subject" placeholder="Your Subject *" required>
                                 </div>
                                 <div class="input-group">
-                                    <textarea name="message" id="message" placeholder="Your Message *"></textarea>
+                                    <textarea name="message" id="message" placeholder="Your Message *" required></textarea>
                                 </div>
                                 <div class="input-group">
                                     <button class="theme-btn submit-btn" name="submit" type="submit">Send Message</button>
@@ -161,6 +164,7 @@
     <script src="assets/js/aos.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ajax-form.js"></script>
+    <script src="assets/js/data-loader.js"></script>
 </body>
 
 <!-- Mirrored from wpriverthemes.com/landing/gridx-html/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Feb 2026 16:32:18 GMT -->
