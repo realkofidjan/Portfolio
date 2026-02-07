@@ -1,33 +1,13 @@
 (function ($) {
     'use strict';
     var form = $('.contact-form form'),
-        message = $('.messenger-box-contact__msg'),
-        form_data;
-
-    // Success function
-    function done_func(response) {
-        message.fadeIn().removeClass('alert-danger').addClass('alert-success');
-        message.text(response.message || 'Your message was sent successfully.');
-        setTimeout(function () {
-            message.fadeOut();
-        }, 3000);
-        form.find('input:not([type="submit"]):not([type="hidden"]), textarea').val('');
-    }
-
-    // Fail function
-    function fail_func(data) {
-        message.fadeIn().removeClass('alert-success').addClass('alert-danger');
-        message.text(data.responseJSON ? data.responseJSON.message : 'Something went wrong. Please try again.');
-        setTimeout(function () {
-            message.fadeOut();
-        }, 3000);
-    }
+        message = $('.messenger-box-contact__msg');
 
     form.submit(function (e) {
         e.preventDefault();
 
-        const fullName = document.getElementById("full-name");
-        const email = document.getElementById("email");
+        var fullName = document.getElementById("full-name");
+        var email = document.getElementById("email");
 
         if (!fullName.value || !email.value) {
             if (!fullName.value) fullName.classList.add("invalid");
@@ -35,15 +15,37 @@
             return false;
         }
 
-        form_data = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: form.attr('action'),
-            data: form_data,
-            dataType: 'json'
+        var formData = new FormData(this);
+        var object = {};
+        formData.forEach(function (value, key) {
+            object[key] = value;
+        });
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(object)
         })
-        .done(done_func)
-        .fail(fail_func);
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data.success) {
+                message.fadeIn().removeClass('alert-danger').addClass('alert-success');
+                message.text(data.message || 'Your message was sent successfully.');
+                form.find('input:not([type="submit"]):not([type="hidden"]), textarea').val('');
+            } else {
+                message.fadeIn().removeClass('alert-success').addClass('alert-danger');
+                message.text(data.message || 'Something went wrong. Please try again.');
+            }
+            setTimeout(function () { message.fadeOut(); }, 3000);
+        })
+        .catch(function () {
+            message.fadeIn().removeClass('alert-success').addClass('alert-danger');
+            message.text('Something went wrong. Please try again.');
+            setTimeout(function () { message.fadeOut(); }, 3000);
+        });
     });
 
 })(jQuery);
