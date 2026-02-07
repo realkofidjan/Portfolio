@@ -51,7 +51,12 @@
   function populateIndex(p) {
     setText('index-tagline', p.headline);
     setText('index-name', p.name + '.');
-    setText('index-bio', p.about ? p.about.split('.').slice(0, 2).join('.') + '.' : '');
+    // Truncate bio to 10 words with ellipsis on index page
+    if (p.about) {
+      var words = p.about.split(/\s+/);
+      var truncated = words.length > 10 ? words.slice(0, 10).join(' ') + '...' : words.join(' ');
+      setText('index-bio', truncated);
+    }
     updateYearsOfExperience(p.experienceStartYear);
   }
 
@@ -297,6 +302,44 @@
           console.warn('data-loader: Could not load blog.json, using HTML fallback.', err);
         })
     );
+  }
+
+  // ── Project images from GitHub repos (works.html) ──
+  if (page === 'works.html') {
+    var projectItems = document.querySelectorAll('.project-item');
+    projectItems.forEach(function (item) {
+      var link = item.querySelector('a.overlay-link');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      // Extract owner/repo from GitHub URL
+      var match = href.match(/github\.com\/([^\/]+\/[^\/]+)/);
+      if (!match) return;
+      var repo = match[1];
+      var rawUrl = 'https://raw.githubusercontent.com/' + repo + '/main/cover.jpg';
+      var imgDiv = item.querySelector('.project-img');
+      if (!imgDiv) return;
+      var img = imgDiv.querySelector('img');
+      if (!img) return;
+
+      // Try to load cover.jpg from repo
+      var testImg = new Image();
+      testImg.onload = function () {
+        img.src = rawUrl;
+      };
+      testImg.onerror = function () {
+        // Try master branch as fallback
+        var masterUrl = 'https://raw.githubusercontent.com/' + repo + '/master/cover.jpg';
+        var testImg2 = new Image();
+        testImg2.onload = function () {
+          img.src = masterUrl;
+        };
+        testImg2.onerror = function () {
+          imgDiv.style.display = 'none';
+        };
+        testImg2.src = masterUrl;
+      };
+      testImg.src = rawUrl;
+    });
   }
 
   if (promises.length) {
