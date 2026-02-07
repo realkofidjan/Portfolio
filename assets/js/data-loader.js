@@ -328,7 +328,9 @@
   };
 
   function repoToTitle(name) {
-    return name.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    var full = name.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    var words = full.split(/\s+/);
+    return words.length > 2 ? words.slice(0, 2).join(' ') + '...' : full;
   }
 
   function loadCoverImage(repo, imgDiv, img) {
