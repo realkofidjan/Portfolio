@@ -304,42 +304,173 @@
     );
   }
 
-  // ── Project images from GitHub repos (works.html) ──
-  if (page === 'works.html') {
-    var projectItems = document.querySelectorAll('.project-item');
-    projectItems.forEach(function (item) {
-      var link = item.querySelector('a.overlay-link');
-      if (!link) return;
-      var href = link.getAttribute('href') || '';
-      // Extract owner/repo from GitHub URL
-      var match = href.match(/github\.com\/([^\/]+\/[^\/]+)/);
-      if (!match) return;
-      var repo = match[1];
-      var rawUrl = 'https://raw.githubusercontent.com/' + repo + '/main/cover.jpg';
-      var imgDiv = item.querySelector('.project-img');
-      if (!imgDiv) return;
-      var img = imgDiv.querySelector('img');
-      if (!img) return;
+  // ── GitHub Projects (works.html) ──
 
-      // Try to load cover.jpg from repo
-      var testImg = new Image();
-      testImg.onload = function () {
-        img.src = rawUrl;
-      };
-      testImg.onerror = function () {
-        // Try master branch as fallback
-        var masterUrl = 'https://raw.githubusercontent.com/' + repo + '/master/cover.jpg';
-        var testImg2 = new Image();
-        testImg2.onload = function () {
-          img.src = masterUrl;
-        };
-        testImg2.onerror = function () {
-          imgDiv.style.display = 'none';
-        };
-        testImg2.src = masterUrl;
-      };
-      testImg.src = rawUrl;
+  var githubConfig = {
+    username: 'realkofidjan',
+    extraRepos: ['Ashesi-Org/ATTA'],
+    excludeRepos: ['realkofidjan', 'Portfolio'],
+    excludeForks: true
+  };
+
+  var languageCategoryMap = {
+    'JavaScript': 'WEB DEVELOPMENT',
+    'TypeScript': 'WEB DEVELOPMENT',
+    'Python': 'PYTHON DEVELOPMENT',
+    'Java': 'JAVA APPLICATION',
+    'HTML': 'HTML / CSS',
+    'CSS': 'HTML / CSS',
+    'C++': 'C++ DEVELOPMENT',
+    'C': 'C DEVELOPMENT',
+    'Dart': 'MOBILE DEVELOPMENT',
+    'Kotlin': 'MOBILE DEVELOPMENT',
+    'Swift': 'MOBILE DEVELOPMENT'
+  };
+
+  function repoToTitle(name) {
+    return name.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function loadCoverImage(repo, imgDiv, img) {
+    var fullName = repo.full_name;
+    var branch = repo.default_branch || 'main';
+    var rawUrl = 'https://raw.githubusercontent.com/' + fullName + '/' + branch + '/cover.jpg';
+    var testImg = new Image();
+    testImg.onload = function () { img.src = rawUrl; };
+    testImg.onerror = function () { imgDiv.style.display = 'none'; };
+    testImg.src = rawUrl;
+  }
+
+  function renderProjects(repos) {
+    var container = document.getElementById('projects-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    // Build rows of 2
+    for (var i = 0; i < repos.length; i += 2) {
+      var rowDiv = document.createElement('div');
+      rowDiv.className = 'd-flex align-items-start gap-24';
+
+      for (var j = i; j < Math.min(i + 2, repos.length); j++) {
+        var repo = repos[j];
+        var category = languageCategoryMap[repo.language] || 'SOFTWARE DEVELOPMENT';
+        var title = repoToTitle(repo.name);
+        var url = repo.html_url;
+
+        var wrapper = document.createElement('div');
+        wrapper.setAttribute('data-aos', 'zoom-in');
+        wrapper.className = 'flex-1';
+
+        var card = document.createElement('div');
+        card.className = 'project-item shadow-box';
+
+        var overlayLink = document.createElement('a');
+        overlayLink.className = 'overlay-link';
+        overlayLink.href = url;
+        overlayLink.target = '_blank';
+
+        var bgImg = document.createElement('img');
+        bgImg.src = 'assets/images/bg1.png';
+        bgImg.alt = 'BG';
+        bgImg.className = 'bg-img';
+
+        var imgDiv = document.createElement('div');
+        imgDiv.className = 'project-img';
+        var img = document.createElement('img');
+        img.alt = 'Project';
+        imgDiv.appendChild(img);
+
+        loadCoverImage(repo, imgDiv, img);
+
+        var infoRow = document.createElement('div');
+        infoRow.className = 'd-flex align-items-center justify-content-between';
+
+        var infoDiv = document.createElement('div');
+        infoDiv.className = 'project-info';
+        var pTag = document.createElement('p');
+        pTag.textContent = category;
+        var h1Tag = document.createElement('h1');
+        h1Tag.textContent = title;
+        infoDiv.appendChild(pTag);
+        infoDiv.appendChild(h1Tag);
+
+        var btnLink = document.createElement('a');
+        btnLink.href = url;
+        btnLink.target = '_blank';
+        btnLink.className = 'project-btn';
+        var btnImg = document.createElement('img');
+        btnImg.src = 'assets/images/icon.svg';
+        btnImg.alt = 'Button';
+        btnLink.appendChild(btnImg);
+
+        infoRow.appendChild(infoDiv);
+        infoRow.appendChild(btnLink);
+
+        card.appendChild(overlayLink);
+        card.appendChild(bgImg);
+        card.appendChild(imgDiv);
+        card.appendChild(infoRow);
+        wrapper.appendChild(card);
+        rowDiv.appendChild(wrapper);
+      }
+
+      container.appendChild(rowDiv);
+    }
+
+    refreshAOS();
+  }
+
+  if (page === 'works.html') {
+    var userUrl = 'https://api.github.com/users/' + githubConfig.username + '/repos?per_page=100&sort=updated';
+
+    var fetchPromises = [
+      fetch(userUrl).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+    ];
+
+    githubConfig.extraRepos.forEach(function (repoPath) {
+      fetchPromises.push(
+        fetch('https://api.github.com/repos/' + repoPath).then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        }).then(function (repo) { return [repo]; })
+      );
     });
+
+    Promise.all(fetchPromises)
+      .then(function (results) {
+        var allRepos = [];
+        results.forEach(function (r) { allRepos = allRepos.concat(r); });
+
+        // Deduplicate by full_name
+        var seen = {};
+        allRepos = allRepos.filter(function (r) {
+          if (seen[r.full_name]) return false;
+          seen[r.full_name] = true;
+          return true;
+        });
+
+        // Filter
+        allRepos = allRepos.filter(function (r) {
+          if (githubConfig.excludeForks && r.fork) return false;
+          if (githubConfig.excludeRepos.indexOf(r.name) !== -1) return false;
+          return true;
+        });
+
+        // Sort by updated_at descending
+        allRepos.sort(function (a, b) {
+          return new Date(b.updated_at) - new Date(a.updated_at);
+        });
+
+        renderProjects(allRepos);
+      })
+      .catch(function (err) {
+        console.warn('data-loader: Could not load GitHub repos.', err);
+        var container = document.getElementById('projects-list');
+        if (container) container.innerHTML = '<p class="text-center">Could not load projects. Please try again later.</p>';
+      });
   }
 
   if (promises.length) {
